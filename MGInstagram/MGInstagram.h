@@ -35,5 +35,7 @@ extern NSString* const kInstagramOnlyPhotoFileName;
 //Same as above method but with the option for a photo caption
 + (void) postImage:(UIImage*)image withCaption:(NSString*)caption inView:(UIView*)view;
 + (void) postImage:(UIImage*)image withCaption:(NSString*)caption inView:(UIView*)view delegate:(id<UIDocumentInteractionControllerDelegate>)delegate;
+//Rect added to be able to control UIDocumentInteractionController presentation position on iPad
++ (void) postImage:(UIImage*)image withCaption:(NSString*)caption inView:(UIView*)view fromRect:(CGRect)rect delegate:(id<UIDocumentInteractionControllerDelegate>)delegate;
 
 @end

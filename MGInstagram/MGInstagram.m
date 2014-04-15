@@ -69,10 +69,16 @@ NSString* const kInstagramOnlyPhotoFileName = @"tempinstgramphoto.igo";
 }
 
 + (void) postImage:(UIImage*)image withCaption:(NSString*)caption inView:(UIView*)view delegate:(id<UIDocumentInteractionControllerDelegate>)delegate {
-    [[MGInstagram sharedInstance] postImage:image withCaption:caption inView:view delegate:delegate];
+
+    [self postImage:image withCaption:caption inView:view fromRect:CGRectZero delegate:delegate];
 }
 
-- (void) postImage:(UIImage*)image withCaption:(NSString*)caption inView:(UIView*)view delegate:(id<UIDocumentInteractionControllerDelegate>)delegate
++ (void) postImage:(UIImage*)image withCaption:(NSString*)caption inView:(UIView*)view fromRect:(CGRect)rect delegate:(id<UIDocumentInteractionControllerDelegate>)delegate
+{
+    [[MGInstagram sharedInstance] postImage:image withCaption:caption inView:view fromRect:rect delegate:delegate];
+}
+
+- (void) postImage:(UIImage*)image withCaption:(NSString*)caption inView:(UIView*)view fromRect:(CGRect)rect delegate:(id<UIDocumentInteractionControllerDelegate>)delegate
 {
     if (!image)
         [NSException raise:NSInternalInconsistencyException format:@"Image cannot be nil!"];
@@ -85,7 +91,7 @@ NSString* const kInstagramOnlyPhotoFileName = @"tempinstgramphoto.igo";
     documentInteractionController.delegate = delegate;
     if (caption)
         documentInteractionController.annotation = [NSDictionary dictionaryWithObject:caption forKey:@"InstagramCaption"];
-    [documentInteractionController presentOpenInMenuFromRect:CGRectZero inView:view animated:YES];
+    [documentInteractionController presentOpenInMenuFromRect:rect inView:view animated:YES];
 }
 
 
